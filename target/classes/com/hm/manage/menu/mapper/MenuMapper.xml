@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hm.manage.menu.dao.IMenuDao">
+
+	<!--新增菜单信息-->
+	<insert id="insertMenuInfo" parameterType="MenuBo">
+		insert into cl_menu (id, menuName, menuUrl, parentId)
+		values (#{id,jdbcType=BIGINT}, #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改菜单信息-->
+	<update id="updateMenuInfo" parameterType="MenuBo">
+		update cl_menu
+			<set>
+				menuName = #{menuName,jdbcType=VARCHAR},
+				menuUrl = #{menuUrl,jdbcType=VARCHAR},
+				parentId = #{parentId,jdbcType=BIGINT}
+			</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询菜单信息-->
+	<select id="selectMenuById" parameterType="java.lang.Long" resultType="MenuBo">
+		select id, menuName, menuUrl, parentId from cl_menu where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除菜单信息-->
+	<delete id="deleteMenuById" parameterType="java.lang.Long">
+		delete from cl_menu where id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>

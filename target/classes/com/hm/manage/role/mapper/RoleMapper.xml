@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hm.manage.role.dao.IRoleDao">
+
+	<!--新增角色表数据信息-->
+	<insert id="insertRoleInfo" parameterType="RoleBo">
+		insert into cl_role (id, roleName)
+		values (#{id,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR})
+	</insert>
+
+	<!--修改角色表数据信息-->
+	<update id="updateRoleInfo" parameterType="RoleBo">
+		update cl_role
+			<set>
+				roleName = #{roleName,jdbcType=VARCHAR}
+			</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询角色表数据信息-->
+	<select id="selectRoleInfoById" parameterType="java.lang.Long" resultType="RoleBo">
+		select id, roleName from cl_role where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除角色表数据信息-->
+	<delete id="delRoleInfoById" parameterType="java.lang.Long">
+		delete from cl_role where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增角色与权限关联表数据信息-->
+	<insert id="insertRolePowerInfo" parameterType="RolePowerBo">
+		insert into cl_role_power (id, roleId, powerId)
+		values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{powerId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改角色与权限关联表数据信息-->
+	<update id="updateRolePowerInfo" parameterType="RolePowerBo">
+		update cl_role_power
+		<set>
+			roleId = #{roleId,jdbcType=BIGINT},
+			powerId = #{powerId,jdbcType=BIGINT}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询角色与权限关联表数据信息-->
+	<select id="selectRolePowerInfoById" parameterType="java.lang.Long" resultType="RolePowerBo">
+		select id, roleId, powerId from cl_role_power where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="delRolePowerInfoById" parameterType="java.lang.Long">
+		delete from cl_role_power where id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hm.manage.operation.dao.IOperationDao">
+
+	<!--新增功能操作表数据信息-->
+	<insert id="insertOperationInfo" parameterType="OperationBo">
+		insert into cl_operation
+			(id, operationName, operationCode, ljUrlQz, parentId)
+		values
+			(#{id,jdbcType=BIGINT}, #{operationName,jdbcType=VARCHAR}, #{operationCode,jdbcType=VARCHAR},
+				#{ljUrlQz,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改功能操作表数据信息-->
+	<update id="updateOperationInfo" parameterType="OperationBo">
+		update cl_operation
+			<set>
+				operationName = #{operationName,jdbcType=VARCHAR},
+				operationCode = #{operationCode,jdbcType=VARCHAR},
+				ljUrlQz = #{ljUrlQz,jdbcType=VARCHAR},
+				parentId = #{parentId,jdbcType=BIGINT}
+			</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--获取功能操作表数据信息-->
+	<select id="selectOperationInfoById" parameterType="java.lang.Long" resultType="OperationBo">
+		select id, operationName, operationCode, ljUrlQz, parentId from cl_operation where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除功能操作表数据信息-->
+	<delete id="delOperationInfoById" parameterType="java.lang.Long">
+		delete from cl_operation where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增操作日志表数据信息-->
+	<insert id="insertOperationLogInfo" parameterType="OperationLogBo">
+		insert into cl_operationlog
+			(id, operationTypeId, operationContent, operationUserId, operationTime)
+		values
+			(#{id,jdbcType=BIGINT}, #{operationTypeId,jdbcType=BIGINT}, #{operationContent,jdbcType=VARCHAR},
+				#{operationUserId,jdbcType=BIGINT}, #{operationTime,jdbcType=TIMESTAMP})
+	</insert>
+
+	<!--修改操作日志表数据信息-->
+	<update id="updateOperationLogInfo" parameterType="OperationLogBo">
+		update cl_operationlog
+		<set>
+			operationTypeId = #{operationTypeId,jdbcType=BIGINT},
+			operationContent = #{operationContent,jdbcType=VARCHAR},
+			operationUserId = #{operationUserId,jdbcType=BIGINT},
+			operationTime = #{operationTime,jdbcType=TIMESTAMP}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询操作日志表数据信息-->
+	<select id="selectOperationLogInfoById" parameterType="java.lang.Long" resultType="OperationLogBo">
+		select id, operationTypeId, operationContent, operationUserId, operationTime from cl_operationlog where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除操作日志表数据信息-->
+	<delete id="delOperationLogInfoById" parameterType="java.lang.Long">
+		delete from cl_operationlog where id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>

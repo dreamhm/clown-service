@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hm.manage.user.dao.IUserDao">
+
+	<!--新增用户组表数据信息-->
+	<insert id="insertUserGroupInfo" parameterType="UserGroupBo">
+		insert into cl_usergroup (id, userGroupName)
+		values (#{id,jdbcType=BIGINT}, #{userGroupName,jdbcType=VARCHAR})
+	</insert>
+
+	<!--修改用户组表数据信息-->
+	<update id="updateUserGroupInfo" parameterType="UserGroupBo">
+		update cl_usergroup
+		<set>
+			userGroupName = #{userGroupName,jdbcType=VARCHAR}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询用户组表数据信息-->
+	<select id="selectUserGroupInfoById" parameterType="java.lang.Long" resultType="UserGroupBo">
+		select id, userGroupName from cl_usergroup where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--查询用户组表列表信息-->
+	<select id="selectUserGroupList" parameterType="java.util.Map" resultType="UserGroupBo">
+		select id, userGroupName from cl_usergroup
+	</select>
+
+	<!--删除用户组表数据信息-->
+	<delete id="delUserGroupInfoById" parameterType="java.lang.Long">
+		delete from cl_usergroup where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增用户组与角色关联表数据信息-->
+	<insert id="insertUserGroupRoleInfo" parameterType="UserGroupRoleBo">
+		insert into cl_usergroup_role (id, usergroupId, roleId)
+		values (#{id,jdbcType=BIGINT}, #{usergroupId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改用户组与角色关联表数据信息-->
+	<update id="updateUserGroupRoleInfo" parameterType="UserGroupRoleBo">
+		update cl_usergroup_role
+		<set>
+			usergroupId = #{usergroupId,jdbcType=BIGINT},
+			roleId = #{roleId,jdbcType=BIGINT}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询用户组与角色关联表数据信息-->
+	<select id="selectUserGroupRoleInfoById" parameterType="java.lang.Long" resultType="UserGroupRoleBo">
+		select id, usergroupId, roleId from cl_usergroup_role where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除用户组与角色关联表数据信息-->
+	<delete id="delUserGroupRoleInfoById" parameterType="java.lang.Long">
+		delete from cl_usergroup_role where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增用户组与用户信息关联表数据信息-->
+	<insert id="insertUserGroupUserInfo" parameterType="UserGroupUserInfoBo">
+		insert into cl_usergroup_userinfo (id, userGroupId, userId)
+		values (#{id,jdbcType=BIGINT}, #{userGroupId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改用户组与用户信息关联表数据信息-->
+	<update id="updateUserGroupUserInfo" parameterType="UserGroupUserInfoBo">
+		update cl_usergroup_userinfo
+		<set>
+			userGroupId = #{userGroupId,jdbcType=BIGINT},
+			userId = #{userId,jdbcType=BIGINT}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询用户组与用户信息关联表数据信息-->
+	<select id="selectUserGroupUserInfoById" parameterType="java.lang.Long" resultType="UserGroupUserInfoBo">
+		select id, userGroupId, userId from cl_usergroup_userinfo where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除用户组与用户信息关联表数据信息-->
+	<delete id="delUserGroupUserInfoById" parameterType="java.lang.Long">
+		delete from cl_usergroup_userinfo where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增用户与角色关联表数据信息-->
+	<insert id="insertUserRoleInfo" parameterType="UserRoleBo">
+		insert into cl_user_role (id, userId, roleId)
+		values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改用户与角色关联表数据信息-->
+	<update id="updateUserRoleInfo" parameterType="UserRoleBo">
+		update cl_user_role
+		<set>
+			userId = #{userId,jdbcType=BIGINT},
+			roleId = #{roleId,jdbcType=BIGINT}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询用户与角色关联表数据信息-->
+	<select id="selectUserRoleInfoById" parameterType="java.lang.Long" resultType="UserRoleBo">
+		select id, userId, roleId from cl_user_role where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除用户与角色关联表数据信息-->
+	<delete id="delUserRoleInfoById" parameterType="java.lang.Long">
+		delete from cl_user_role where id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>

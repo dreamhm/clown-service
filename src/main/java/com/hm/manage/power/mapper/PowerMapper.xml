@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hm.manage.power.dao.IPowerDao">
+
+	<!--新增权限表数据信息-->
+	<insert id="insertPowerInfo" parameterType="PowerBo">
+		insert into cl_power (id, powerType)
+		values (#{id,jdbcType=BIGINT}, #{powerType,jdbcType=VARCHAR})
+	</insert>
+
+	<!--修改权限表数据信息-->
+	<update id="updatePowerInfo" parameterType="PowerBo">
+		update cl_power
+			<set>
+				powerType = #{powerType,jdbcType=VARCHAR}
+			</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询权限表数据信息-->
+	<select id="selectPowerInfoById" parameterType="java.lang.Long" resultType="PowerBo">
+		select id, powerType from cl_power where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除权限表数据信息-->
+	<delete id="delPowerInfoById" parameterType="java.lang.Long">
+		delete from cl_power where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增权限与文件关联表数据信息-->
+	<insert id="insertPowerFileInfo" parameterType="PowerFileBo">
+		insert into cl_power_file (id, powerId, fileId)
+		values (#{id,jdbcType=BIGINT}, #{powerId,jdbcType=BIGINT}, #{fileId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改权限与文件关联表数据信息-->
+	<update id="updatePowerFileInfo" parameterType="PowerFileBo">
+		update cl_power_file
+		<set>
+			powerId = #{powerId,jdbcType=BIGINT},
+			fileId = #{fileId,jdbcType=BIGINT}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询权限与文件关联表数据信息-->
+	<select id="selectPowerFileInfoById" parameterType="java.lang.Long" resultType="PowerFileBo">
+		select id, powerId, fileId from cl_power_file where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除权限与文件关联表数据信息-->
+	<delete id="delPowerFileInfoById" parameterType="java.lang.Long">
+		delete from cl_power_file where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增权限与菜单关联表数据信息-->
+	<insert id="insertPowerMenuInfo" parameterType="PowerMenuBo">
+		insert into cl_power_menu (id, powerId, menuId)
+		values (#{id,jdbcType=BIGINT}, #{powerId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改权限与菜单关联表数据信息-->
+	<update id="updatePowerMenuInfo" parameterType="PowerMenuBo">
+		update cl_power_menu
+		<set>
+			powerId = #{powerId,jdbcType=BIGINT},
+			menuId = #{menuId,jdbcType=BIGINT}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询权限与菜单关联表数据信息-->
+	<select id="selectPowerMenuInfoById" parameterType="java.lang.Long" resultType="PowerMenuBo">
+		select id, powerId, menuId from cl_power_menu where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除权限与菜单关联表数据信息-->
+	<delete id="delPowerMenuInfoById" parameterType="java.lang.Long">
+		delete from cl_power_menu where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增权限与功能操作关联表数据信息-->
+	<insert id="insertPowerOperationInfo" parameterType="PowerOperationBo">
+		insert into cl_power_operation (id, powerId, operationId)
+		values (#{id,jdbcType=BIGINT}, #{powerId,jdbcType=BIGINT}, #{operationId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改权限与功能操作关联表数据信息-->
+	<update id="updatePowerOperationInfo" parameterType="PowerOperationBo">
+		update cl_power_operation
+		<set>
+			powerId = #{powerId,jdbcType=BIGINT},
+			operationId = #{operationId,jdbcType=BIGINT}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询权限与功能操作关联表数据信息-->
+	<select id="selectPowerOperationInfoById" parameterType="java.lang.Long" resultType="PowerOperationBo">
+		select id, powerId, operationId from cl_power_operation where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除权限与功能操作关联表数据信息-->
+	<delete id="delPowerOperationInfoById" parameterType="java.lang.Long">
+		delete from cl_power_operation where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--新增权限与页面元素关联表数据信息-->
+	<insert id="insertPowerPageInfo" parameterType="PowerPageBo">
+		insert into cl_power_page (id, powerId, pageId)
+		values (#{id,jdbcType=BIGINT}, #{powerId,jdbcType=BIGINT}, #{pageId,jdbcType=BIGINT})
+	</insert>
+
+	<!--修改权限与页面元素关联表数据信息-->
+	<update id="updatePowerPageInfo" parameterType="PowerPageBo">
+		update cl_power_page
+		<set>
+			powerId = #{powerId,jdbcType=BIGINT},
+			pageId = #{pageId,jdbcType=BIGINT}
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询权限与页面元素关联表数据信息-->
+	<select id="selectPowerPageInfoById" parameterType="java.lang.Long" resultType="PowerPageBo">
+		select id, powerId, pageId from cl_power_page where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除权限与页面元素关联表数据信息-->
+	<delete id="delPowerPageInfoById" parameterType="java.lang.Long">
+		delete from cl_power_page where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hm.serve.userInfo.dao.IUserInfoDao">
+
+	<!--新增人员信息-->
+	<insert id="insertUserInfo" parameterType="UserInfo">
+		insert into cl_userinfo (id, username, password, salt)
+		values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
+	</insert>
+
+	<!--修改人员信息-->
+	<update id="updateUserInfo" parameterType="UserInfo">
+		update cl_userinfo
+			<set>
+				username = #{username,jdbcType=VARCHAR},
+				password = #{password,jdbcType=VARCHAR},
+				salt = #{salt,jdbcType=VARCHAR}
+			</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询用户信息 id-->
+	<select id="selectUserInfoById" parameterType="java.lang.Long" resultType="UserInfo">
+		select id, username, password, salt from cl_userinfo where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--查询用户信息 username-->
+	<select id="selectUserInfoByName" parameterType="java.lang.String" resultType="UserInfo">
+		select id, username, password, salt from cl_userinfo where username = #{username,jdbcType=VARCHAR}
+	</select>
+
+	<!--查询用户列表信息 param-->
+	<select id="selectUserList" parameterType="java.util.Map" resultType="UserInfo">
+		select id, username, password, salt
+		from cl_userinfo
+		<where>
+			<if test="username!=null and username.trim()!=''">
+				and username like '%${username}%'
+			</if>
+		</where>
+	</select>
+	<!--/*limit #{page,jdbcType=INTEGER}, #{pageCount,jdbcType=INTEGER}*/-->
+
+	<!--删除用户信息-->
+	<delete id="delUserInfoById" parameterType="java.lang.Long">
+		delete from cl_userinfo where id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>

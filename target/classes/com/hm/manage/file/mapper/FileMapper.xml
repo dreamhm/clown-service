@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hm.manage.file.dao.IFileDao">
+
+	<!--新增菜单信息-->
+	<insert id="insertFileInfo" parameterType="FileBo">
+		insert into cl_file (id, fileName, filePath)
+		values (#{id,jdbcType=BIGINT}, #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR})
+	</insert>
+
+	<!--修改菜单信息-->
+	<update id="updFileInfo" parameterType="FileBo">
+		update cl_file
+			<set>
+				fileName = #{fileName,jdbcType=VARCHAR},
+				filePath = #{filePath,jdbcType=VARCHAR}
+			</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--查询菜单信息-->
+	<select id="selectFileById" parameterType="java.lang.Long" resultType="FileBo">
+		select id, fileName, filePath from cl_file where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--删除菜单信息-->
+	<delete id="deleteFileById" parameterType="java.lang.Long">
+		delete from cl_file where id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>
